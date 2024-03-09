@@ -1,0 +1,46 @@
+= Getting Started
+
+* Hello, world!
+
+====
+[source]
+.`main.rs`
+----
+fn main() { <1> <2>
+    println!("Hello, world!"); <3> <4>
+}
+----
+<1> Declares a funtion named `main` that has no parameters and returns nothing
+<2> The `main` function is special: it is always the first code that runs in every executable Rust program
+<3> `println!` calls a macro, not a function footnote:[`println` calls a function]
+<4> The macro takes on argument which is of type string
+====
+
+* Format
+
+====
+[source, cmd]
+----
+rustfmt main.rs <1>
+----
+<1> The `rustfmt` tool reformats your code according to the community code style. +
+It is included with the standard Rust distribution.
+====
+
+* Compile
+
+[source, cmd]
+----
+rustc main.rs
+----
+
+Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else, and they can run it *even without having Rust installed*.
+
+On my system, the generated binary executable file's size is 400K.
+
+* Run
+
+[source, cmd]
+----
+./main
+----

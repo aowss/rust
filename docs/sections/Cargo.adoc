@@ -1,0 +1,86 @@
+= Cargo
+
+Cargo is Rust’s build system and package manager footnote:[Cargo is to Rust what Maven is to Java].
+
+Cargo is included with the standard Rust distribution.
+
+* Create a project
+
+[source, cmd]
+----
+cargo new hello_cargo
+----
+
+This will create the binary (application) `hello_cargo` package in the `hello_cargo` directory.
+
+----
+.
+├── .git <1>
+├── .gitignore <1>
+├── Cargo.toml
+└── src
+    └── main.rs
+----
+<1> A Git repository is initialized
+
+====
+[source, toml]
+.`Cargo.toml`
+----
+[package]
+name = "hello_cargo" <1>
+version = "0.1.0" <2>
+edition = "2021" <3>
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies] <4>
+----
+<1> Program name
+<2> Program version
+<3> Rust edition
+<4> Dependencies
+====
+
+* Build project
+
+[source, cmd]
+----
+cargo build
+----
+
+The binary executable `hello_cargo` is placed in the `taget/debug` directory because the default build is a debug build.
+
+A new file named `Cargo.lock` is created at the top level. +
+This file keeps track of the exact versions of dependencies in your project.
+
+* Run
+
+[source, cmd]
+----
+./taget/debug/hello_cargo
+----
+
+We can also use the following command:
+
+[source, cmd]
+----
+cargo run <1>
+----
+<1> The `run` command automatically rebuilds the project if needed
+
+If you just want to check that your project compiles properly, you can use the following command:
+
+[source, cmd]
+----
+cargo check
+----
+
+* Release
+
+[source, cmd]
+----
+cargo build --release
+----
+
+The *optimized* binary is placed in the `taget/release` directory. 

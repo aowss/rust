@@ -1,0 +1,23 @@
+:Author:                Aowss Ibrahim
+:Email:                 <aowss@yahoo.com>
+:Date:                  Mars 2024
+:Revision:              version 0.1.0
+:source-highlighter:    highlightjs
+:source-language:       rust
+:imagesdir:             ./res
+:toc2:
+:toclevels:             5
+:icons:                 font
+:data-uri:
+
+This is a quick introduction to Rust.
+
+include::sections/Pre-requisites.adoc[leveloffset=+1]
+
+include::sections/Getting-Started.adoc[leveloffset=+1]
+
+include::sections/Cargo.adoc[leveloffset=+1]
+
+== Resources
+
+* https://doc.rust-lang.org/book/title-page.html[The Rust Programming Language]
