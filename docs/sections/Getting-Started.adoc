@@ -1,6 +1,6 @@
 = Getting Started
 
-* Hello, world!
+* Code
 
 ====
 [source]
@@ -13,7 +13,7 @@ fn main() { <1> <2>
 <1> Declares a funtion named `main` that has no parameters and returns nothing
 <2> The `main` function is special: it is always the first code that runs in every executable Rust program
 <3> `println!` calls a macro, not a function footnote:[`println` calls a function]
-<4> The macro takes on argument which is of type string
+<4> The macro takes an argument which is of type string
 ====
 
 * Format
@@ -23,7 +23,7 @@ fn main() { <1> <2>
 ----
 rustfmt main.rs <1>
 ----
-<1> The `rustfmt` tool reformats your code according to the community code style. +
+<1> The `rustfmt` tool reformats your code according to the community code style footnote:[This is the equivalent of https://standardjs.com/[StandardJS] for JavaScript]. +
 It is included with the standard Rust distribution.
 ====
 
@@ -34,6 +34,7 @@ It is included with the standard Rust distribution.
 rustc main.rs
 ----
 
+[NOTE]
 Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else, and they can run it *even without having Rust installed*.
 
 On my system, the generated binary executable file's size is 400K.

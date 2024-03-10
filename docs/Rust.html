@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="author" content="Aowss Ibrahim">
-<title>Pre-requisites</title>
+<title>Rust Tutorial</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,19 +441,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
+<h1>Rust Tutorial</h1>
+<div class="details">
+<span id="author" class="author">Aowss Ibrahim</span><br>
+<span id="email" class="email">&lt;<a href="mailto:aowss@yahoo.com">aowss@yahoo.com</a>&gt;</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_pre_requisites">Pre-requisites</a></li>
 <li><a href="#_getting_started">Getting Started</a></li>
-<li><a href="#_cargo">Cargo</a></li>
+<li><a href="#_cargo">Cargo</a>
+<ul class="sectlevel2">
+<li><a href="#_dependency_management">Dependency management</a></li>
+</ul>
+</li>
+<li><a href="#_first_program">First Program</a></li>
 <li><a href="#_resources">Resources</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>This is a quick introduction to Rust.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_pre_requisites">Pre-requisites</h2>
@@ -476,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Hello, world!</p>
+<p>Code</p>
 </li>
 </ul>
 </div>
@@ -506,7 +520,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The macro takes on argument which is of type string</td>
+<td>The macro takes an argument which is of type string</td>
 </tr>
 </table>
 </div>
@@ -530,7 +544,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>rustfmt</code> tool reformats your code according to the community code style.<br>
+<td>The <code>rustfmt</code> tool reformats your code according to the community code style <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>.<br>
 It is included with the standard Rust distribution.</td>
 </tr>
 </table>
@@ -549,8 +563,17 @@ It is included with the standard Rust distribution.</td>
 <pre class="highlightjs highlight"><code class="language-cmd hljs" data-lang="cmd">rustc main.rs</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else, and they can run it <strong>even without having Rust installed</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else, and they can run it <strong>even without having Rust installed</strong>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>On my system, the generated binary executable file&#8217;s size is 400K.</p>
@@ -573,7 +596,7 @@ It is included with the standard Rust distribution.</td>
 <h2 id="_cargo">Cargo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cargo is Rust’s build system and package manager <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>.</p>
+<p>Cargo is Rust’s build system and package manager <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup>.</p>
 </div>
 <div class="paragraph">
 <p>Cargo is included with the standard Rust distribution.</p>
@@ -598,7 +621,7 @@ It is included with the standard Rust distribution.</td>
 <pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">.
 ├── .git <i class="conum" data-value="1"></i><b>(1)</b>
 ├── .gitignore <i class="conum" data-value="1"></i><b>(1)</b>
-├── Cargo.toml
+├── Cargo.toml <i class="conum" data-value="2"></i><b>(2)</b>
 └── src
     └── main.rs</code></pre>
 </div>
@@ -608,6 +631,10 @@ It is included with the standard Rust distribution.</td>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>A Git repository is initialized</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Why use <a href="https://toml.io/en/">TOML</a>?</td>
 </tr>
 </table>
 </div>
@@ -661,11 +688,7 @@ edition = "2021" <i class="conum" data-value="3"></i><b>(3)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>The binary executable <code>hello_cargo</code> is placed in the <code>taget/debug</code> directory because the default build is a debug build.</p>
-</div>
-<div class="paragraph">
-<p>A new file named <code>Cargo.lock</code> is created at the top level.<br>
-This file keeps track of the exact versions of dependencies in your project.</p>
+<p>The binary executable <code>hello_cargo</code> is placed in the <code>target/debug</code> directory because the default build is a debug build.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -676,7 +699,7 @@ This file keeps track of the exact versions of dependencies in your project.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-cmd hljs" data-lang="cmd">./taget/debug/hello_cargo</code></pre>
+<pre class="highlightjs highlight"><code class="language-cmd hljs" data-lang="cmd">./target/debug/hello_cargo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -716,7 +739,300 @@ This file keeps track of the exact versions of dependencies in your project.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <strong>optimized</strong> binary is placed in the <code>taget/release</code> directory.</p>
+<p>The <strong>optimized</strong> binary is placed in the <code>target/release</code> directory.</p>
+</div>
+<div class="sect2">
+<h3 id="_dependency_management">Dependency management</h3>
+<div class="paragraph">
+<p>When we include an external dependency, Cargo fetches the latest compatible versions of all the crates that dependency needs from the registry <sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup>.<br></p>
+</div>
+<div class="paragraph">
+<p>A new file named <code>Cargo.lock</code> <sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> is created at the top level with the exact versions of the dependencies computed in the previous step.</p>
+</div>
+<div class="paragraph">
+<p>When you build your project in the future, Cargo will see that the <code>Cargo.lock</code> file exists and will use the versions specified there rather than doing all the work of figuring out versions again.<br>
+If you want Cargo to ignore that file and compute the versions again, use the <code>cargo update</code> command.</p>
+</div>
+<div class="paragraph">
+<p>After downloading the crates, Rust compiles them and then compiles the project with the dependencies available.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Documentation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have dependencies, the following command will build documentation provided by all your dependencies locally <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup> and open it in your browser:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cmd hljs" data-lang="cmd">cargo doc --open</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_first_program">First Program</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a first program, we will implement a guessing game.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Collect user input</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="title"><code>main.rs</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">use std::io; <i class="conum" data-value="1"></i><b>(1)</b>
+
+fn main() {
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new(); <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b> <i class="conum" data-value="5"></i><b>(5)</b>
+
+    io::stdin() <i class="conum" data-value="6"></i><b>(6)</b>
+        .read_line(&amp;mut guess) <i class="conum" data-value="7"></i><b>(7)</b> <i class="conum" data-value="8"></i><b>(8)</b>
+        .expect("Failed to read line"); <i class="conum" data-value="9"></i><b>(9)</b>
+
+    println!("You guessed: {guess}"); <i class="conum" data-value="10"></i><b>(10)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Import the <code>io</code> library so that we can use <code>io</code> instead of <code>std::io</code> in the rest of the code.<br>
+The <code>io</code> library comes from the standard library, a.k.a. <code>std</code>.<br>
+Rust has a set of items, called <a href="https://doc.rust-lang.org/std/prelude/index.html">the prelude</a>, defined in the standard library that it brings into the scope of every program but <code>io</code> isn&#8217;t one of them, so you need bring it into scope explicitly.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>let</code> statement is used to create the variable.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>mut</code> keyword is added to make the variable mutable.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>A new String is bound to the variable <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>new</code> is an associated function of the <code>String</code> type <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The <code>stdin</code> function from the <code>io</code> module returns an instance of <a href="https://doc.rust-lang.org/std/io/struct.Stdin.html"><code>std::io::Stdin</code></a>, which is a type that represents a handle to the standard input for your terminal.<br>
+Calling a function from a module or calling an associated function of a type uses the same syntax.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Calls the <code>read_line</code> method on the <code>Stdin</code> type <sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The passed argument, namely <code>&amp;mut guess</code>, is used by the method to store the user input.<br>
+The argument must be mutable so that <code>read_line</code> can append to it.<br>
+The <code>&amp;</code> indicates that this argument is passed by reference so it&#8217;s not copied into memory.<br>
+Like variables, references are immutable by default so <code>mut</code> is added to make the reference mutable <sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The <code>read_line</code> method returns a value of type <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> which is an enumeration.<br>
+<code>Result</code>’s variants <sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup> are <code>Ok</code> and <code>Err</code>. The <code>Ok</code> variant indicates the operation was successful, and inside <code>Ok</code> is the successfully generated value. The <code>Err</code> variant means the operation failed, and <code>Err</code> contains information about how or why the operation failed.<br>
+The <code>expect</code> method on the <code>Result</code> type will cause the program to crash if this instance of <code>Result</code> is an <code>Err</code> value and return the value in case it is <code>Ok</code>.<br>
+Without this call to <code>expect</code>, the compilation will give a warning that a possible error hasn&#8217;t been handled.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Using string templates.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generate number</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since Rust doesn&#8217;t yet include a random number generator in its standard library, we have to use the <a href="https://crates.io/crates/rand"><code>rand</code></a> library <sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup> crate <sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup>.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="title"><code>Cargo.toml</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[dependencies]
+rand = "0.8.5" <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is actually a shorthand for <code>^0.8.5</code>, which means any version that is at least <code>0.8.5</code> but below <code>0.9.0</code></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="title"><code>main.rs</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">use rand::Rng; <i class="conum" data-value="1"></i><b>(1)</b>
+
+fn main() {
+    // only showing the number generation code
+    let secret_number = rand::thread_rng() <i class="conum" data-value="2"></i><b>(2)</b>
+                                .gen_range(1..=100); <i class="conum" data-value="3"></i><b>(3)</b> <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Import the <code>Rng</code> trait that defines methods that random number generators implement</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Getting a particular random number generator</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Call the <code>gen_range</code> method that is defined in the <code>Rng</code> trait</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>1..=100</code> is a range</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Compare guess with secret</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="title"><code>main.rs</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">use std::cmp::Ordering; <i class="conum" data-value="1"></i><b>(1)</b>
+
+fn main() {
+    // only showing the comparison code
+    let guess: u32 = guess.trim().parse().expect("Please type a number!"); <i class="conum" data-value="5"></i><b>(5)</b>
+
+    match guess.cmp(&amp;secret_number) { <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+        Ordering::Less =&gt; println!("Too small!"), <i class="conum" data-value="4"></i><b>(4)</b>
+        Ordering::Greater =&gt; println!("Too big!"),
+        Ordering::Equal =&gt; println!("You win!"),
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Import the <code>Ordering</code> type from the <code>std:cmp</code> module.<br>
+The <code>Ordering</code> type is an enum and has the variants <code>Less</code>, <code>Greater</code>, and <code>Equal</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Use the <a href="https://doc.rust-lang.org/book/ch06-02-match.html"><code>match</code></a> <sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup> expression.<br>
+The <code>match</code> expression ends after the first successful match.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>cmp</code> method compares two values and can be called on anything that can be compared.<br>
+It takes a reference to whatever you want to compare with: here it’s comparing <code>guess</code> to <code>secret_number</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Each arm <sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup> in the match expression consists of a pattern to match against and the code to execute in case of a match.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Convert the string to a 32-bit integer ( <code>u32</code> ).<br>
+The type annotation, <code>: u32</code>, tells the <code>parse</code> method the target type of the conversion.<br>
+The <code>guess</code> variable shadows the previously declared variable <sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup>.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiple guesses</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="title"><code>main.rs</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">loop { <i class="conum" data-value="1"></i><b>(1)</b>
+    // only showing the looping code
+    let guess: u32 = match guess.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; continue, <i class="conum" data-value="3"></i><b>(3)</b>
+    };
+
+    match guess.cmp(&amp;secret_number) {
+        Ordering::Less =&gt; println!("Too small!"),
+        Ordering::Greater =&gt; println!("Too big!"),
+        Ordering::Equal =&gt; {
+            println!("You win!");
+            break; <i class="conum" data-value="2"></i><b>(2)</b>
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Loop indefinitely <sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Exit the loop and terminate the game when the guess is right.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Go to the next iteration of the loop in case of invalid input.</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -727,6 +1043,9 @@ This file keeps track of the exact versions of dependencies in your project.</p>
 <ul>
 <li>
 <p><a href="https://doc.rust-lang.org/book/title-page.html">The Rust Programming Language</a></p>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/cargo/index.html">The Cargo Book</a></p>
 </li>
 </ul>
 </div>
@@ -739,12 +1058,57 @@ This file keeps track of the exact versions of dependencies in your project.</p>
 <a href="#_footnoteref_1">1</a>. <code>println</code> calls a function
 </div>
 <div class="footnote" id="_footnotedef_2">
-<a href="#_footnoteref_2">2</a>. Cargo is to Rust what Maven is to Java
+<a href="#_footnoteref_2">2</a>. This is the equivalent of <a href="https://standardjs.com/">StandardJS</a> for JavaScript
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. Cargo is to Rust what <a href="https://maven.apache.org/">Maven</a> is to Java
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. The default registry is <a href="https://crates.io">Crates.io</a>. This is where people in the Rust ecosystem post their open source Rust projects for others to use.
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. This is the equivalent of <a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json"><code>package-lock.json</code></a> for npm
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. In the <code>target/doc</code> directory
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. Why doesn&#8217;t the book say assign
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. Why does the book use the term <code>associated function</code> ?
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. What is the difference between function and method? Calling a function and calling a method use different syntax
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. Why does the reference in itself need to be mutable?
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. Why are those called variants and not values?
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. A library crate is intended to be used in other programs and can’t be executed on its own
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. why are those called crates, not dependencies?
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. Why is it called <code>case</code>, not <code>switch</code>?
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. Why are those called arms, not cases?
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. Why is that a feature?
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. Why is it called <code>loop</code> and not <code>while</code>?`
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-09 11:37:28 -0500
+Last updated 2024-03-10 11:43:28 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

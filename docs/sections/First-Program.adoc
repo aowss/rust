@@ -1,0 +1,137 @@
+= First Program
+
+As a first program, we will implement a guessing game.
+
+* Collect user input
+
+====
+[source]
+.`main.rs`
+----
+use std::io; <1>
+
+fn main() {
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new(); <2> <3> <4> <5>
+
+    io::stdin() <6>
+        .read_line(&mut guess) <7> <8>
+        .expect("Failed to read line"); <9>
+
+    println!("You guessed: {guess}"); <10>
+}
+----
+<1> Import the `io` library so that we can use `io` instead of `std::io` in the rest of the code. +
+The `io` library comes from the standard library, a.k.a. `std`. +
+Rust has a set of items, called https://doc.rust-lang.org/std/prelude/index.html[the prelude], defined in the standard library that it brings into the scope of every program but `io` isn't one of them, so you need bring it into scope explicitly.
+<2> The `let` statement is used to create the variable.
+<3> The `mut` keyword is added to make the variable mutable.
+<4> A new String is bound to the variable footnote:[Why doesn't the book say assign].
+<5> `new` is an associated function of the `String` type footnote:[Why does the book use the term `associated function` ?].
+<6> The `stdin` function from the `io` module returns an instance of https://doc.rust-lang.org/std/io/struct.Stdin.html[`std::io::Stdin`], which is a type that represents a handle to the standard input for your terminal. +
+Calling a function from a module or calling an associated function of a type uses the same syntax.
+<7> Calls the `read_line` method on the `Stdin` type footnote:[What is the difference between function and method? Calling a function and calling a method use different syntax].
+<8> The passed argument, namely `&mut guess`, is used by the method to store the user input. +
+The argument must be mutable so that `read_line` can append to it. +
+The `&` indicates that this argument is passed by reference so it's not copied into memory. +
+Like variables, references are immutable by default so `mut` is added to make the reference mutable footnote:[Why does the reference in itself need to be mutable?].
+<9> The `read_line` method returns a value of type https://doc.rust-lang.org/std/result/enum.Result.html[`Result`] which is an enumeration. +
+`Result`’s variants footnote:[Why are those called variants and not values?] are `Ok` and `Err`. The `Ok` variant indicates the operation was successful, and inside `Ok` is the successfully generated value. The `Err` variant means the operation failed, and `Err` contains information about how or why the operation failed. +
+The `expect` method on the `Result` type will cause the program to crash if this instance of `Result` is an `Err` value and return the value in case it is `Ok`. +
+Without this call to `expect`, the compilation will give a warning that a possible error hasn't been handled.
+<10> Using string templates.
+====
+
+* Generate number
+
+Since Rust doesn't yet include a random number generator in its standard library, we have to use the https://crates.io/crates/rand[`rand`] library footnote:[A library crate is intended to be used in other programs and can’t be executed on its own] crate footnote:[why are those called crates, not dependencies?].
+
+====
+[source, toml]
+.`Cargo.toml`
+----
+[dependencies]
+rand = "0.8.5" <1>
+----
+<1> This is actually a shorthand for `^0.8.5`, which means any version that is at least `0.8.5` but below `0.9.0`
+====
+
+====
+[source]
+.`main.rs`
+----
+use rand::Rng; <1>
+
+fn main() {
+    // only showing the number generation code
+    let secret_number = rand::thread_rng() <2>
+                                .gen_range(1..=100); <3> <4>
+}
+----
+<1> Import the `Rng` trait that defines methods that random number generators implement
+<2> Getting a particular random number generator
+<3> Call the `gen_range` method that is defined in the `Rng` trait
+<4> `1..=100` is a range
+====
+
+* Compare guess with secret
+
+====
+[source]
+.`main.rs`
+----
+use std::cmp::Ordering; <1>
+
+fn main() {
+    // only showing the comparison code
+    let guess: u32 = guess.trim().parse().expect("Please type a number!"); <5>
+
+    match guess.cmp(&secret_number) { <2> <3>
+        Ordering::Less => println!("Too small!"), <4>
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+----
+<1> Import the `Ordering` type from the `std:cmp` module. +
+The `Ordering` type is an enum and has the variants `Less`, `Greater`, and `Equal`.
+<2> Use the https://doc.rust-lang.org/book/ch06-02-match.html[`match`] footnote:[Why is it called `case`, not `switch`?] expression. +
+The `match` expression ends after the first successful match.
+<3> The `cmp` method compares two values and can be called on anything that can be compared. +
+It takes a reference to whatever you want to compare with: here it’s comparing `guess` to `secret_number`.
+<4> Each arm footnote:[Why are those called arms, not cases?] in the match expression consists of a pattern to match against and the code to execute in case of a match.
+<5> Convert the string to a 32-bit integer ( `u32` ). +
+The type annotation, `: u32`, tells the `parse` method the target type of the conversion. +
+The `guess` variable shadows the previously declared variable footnote:[Why is that a feature?].
+====
+
+* Multiple guesses
+
+====
+[source]
+.`main.rs`
+----
+loop { <1>
+    // only showing the looping code
+    let guess: u32 = match guess.trim().parse() {
+        Ok(num) => num,
+        Err(_) => continue, <3>
+    };
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => {
+            println!("You win!");
+            break; <2>
+        }
+    }
+}
+----
+<1> Loop indefinitely footnote:[Why is it called `loop` and not `while`?`].
+<2> Exit the loop and terminate the game when the guess is right.
+<3> Go to the next iteration of the loop in case of invalid input.
+====

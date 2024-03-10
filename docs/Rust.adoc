@@ -1,7 +1,8 @@
-:Author:                Aowss Ibrahim
-:Email:                 <aowss@yahoo.com>
-:Date:                  Mars 2024
-:Revision:              version 0.1.0
+:doctitle:              Rust Tutorial
+:author:                Aowss Ibrahim
+:email:                 <aowss@yahoo.com>
+:date:                  Mars 2024
+:revision:              version 0.1.0
 :source-highlighter:    highlightjs
 :source-language:       rust
 :imagesdir:             ./res
@@ -18,6 +19,9 @@ include::sections/Getting-Started.adoc[leveloffset=+1]
 
 include::sections/Cargo.adoc[leveloffset=+1]
 
+include::sections/First-Program.adoc[leveloffset=+1]
+
 == Resources
 
 * https://doc.rust-lang.org/book/title-page.html[The Rust Programming Language]
+* https://doc.rust-lang.org/cargo/index.html[The Cargo Book]

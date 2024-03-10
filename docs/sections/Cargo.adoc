@@ -1,6 +1,6 @@
 = Cargo
 
-Cargo is Rust’s build system and package manager footnote:[Cargo is to Rust what Maven is to Java].
+Cargo is Rust’s build system and package manager footnote:[Cargo is to Rust what https://maven.apache.org/[Maven] is to Java].
 
 Cargo is included with the standard Rust distribution.
 
@@ -17,11 +17,12 @@ This will create the binary (application) `hello_cargo` package in the `hello_ca
 .
 ├── .git <1>
 ├── .gitignore <1>
-├── Cargo.toml
+├── Cargo.toml <2>
 └── src
     └── main.rs
 ----
 <1> A Git repository is initialized
+<2> Why use https://toml.io/en/[TOML]?
 
 ====
 [source, toml]
@@ -49,16 +50,13 @@ edition = "2021" <3>
 cargo build
 ----
 
-The binary executable `hello_cargo` is placed in the `taget/debug` directory because the default build is a debug build.
-
-A new file named `Cargo.lock` is created at the top level. +
-This file keeps track of the exact versions of dependencies in your project.
+The binary executable `hello_cargo` is placed in the `target/debug` directory because the default build is a debug build.
 
 * Run
 
 [source, cmd]
 ----
-./taget/debug/hello_cargo
+./target/debug/hello_cargo
 ----
 
 We can also use the following command:
@@ -83,4 +81,24 @@ cargo check
 cargo build --release
 ----
 
-The *optimized* binary is placed in the `taget/release` directory. 
+The *optimized* binary is placed in the `target/release` directory.
+
+== Dependency management
+
+When we include an external dependency, Cargo fetches the latest compatible versions of all the crates that dependency needs from the registry footnote:[The default registry is https://crates.io[Crates.io]. This is where people in the Rust ecosystem post their open source Rust projects for others to use.]. +
+
+A new file named `Cargo.lock` footnote:[This is the equivalent of https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json[`package-lock.json`] for npm] is created at the top level with the exact versions of the dependencies computed in the previous step.
+
+When you build your project in the future, Cargo will see that the `Cargo.lock` file exists and will use the versions specified there rather than doing all the work of figuring out versions again. +
+If you want Cargo to ignore that file and compute the versions again, use the `cargo update` command.
+
+After downloading the crates, Rust compiles them and then compiles the project with the dependencies available.
+
+* Documentation
+
+If you have dependencies, the following command will build documentation provided by all your dependencies locally footnote:[In the `target/doc` directory] and open it in your browser:
+
+[source, cmd]
+----
+cargo doc --open
+----
