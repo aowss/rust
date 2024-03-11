@@ -1,0 +1,164 @@
+= Concepts
+
+== Variables
+
+Variables are immutable by default. +
+The `let` keyword is used to create a variable. +
+The `mut` keyword is used to make them mutable.
+
+[WARNING]
+The type of a mutable variable can't be changed by the mutation.
+
+[source]
+----
+let x = 5;
+let mut y = 6;
+----
+
+=== Constants
+
+Constants are values that are bound to a name and are not allowed to change. +
+Constants can be declared in any scope, including the globab scope. +
+Constants can only be set to a constant expression, i.e. one that is not computed at runtime.
+
+The `const` keyword is used to create a constant. +
+Constants must be type annotated.
+
+[source]
+----
+const SECONDS_IN_HOUR: u32 = 60 * 60;
+----
+
+=== Shadowing
+
+You can declare a new variable with the same name as a previous variable. +
+The type of the variables doesn't have to match. +
+In the below example, the variable `x` is immutable.
+
+[source]
+----
+fn main() {
+    let x = "five";
+    // x's value is 'five'
+    let x = 6;
+    // x's value is 6
+    {
+        let x = x * 2;
+        // x's value is 12
+        println!("The value of x in the inner scope is: {x}");
+    }
+    // x's value is 6
+    println!("The value of x is: {x}");
+}
+----
+
+== Data Types
+
+Every value in Rust is of a certain data type.
+
+Rust is a statically typed language, which means that it must know the types of all variables at compile time. 
+
+The compiler can usually infer what type we want to use based on the value and how we use it. In cases when many types are possible, we must add a type annotation.
+
+There are two data type subsets: scalar and compound.
+
+=== Scalar
+
+A scalar type represents a single value. 
+
+Rust has four primary scalar types: integers, floating-point numbers, Booleans and characters.
+
+==== Integer
+
+An integer is a number without a fractional component.
+
+Each variant can be either signed footnote:[Signed numbers are stored using two’s complement representation.] footnote:[In case of overflow, Rust performs two’s complement wrapping.] (prefixed with `i`) or unsigned (prefixed with `u`) and has an explicit size (`8`, `16`, `32`, `64` or `128` bits). +
+The integer types default to `i32`.
+
+Each signed variant can store numbers from `-(2^n^ - 1)` to `2^n-1^ - 1` inclusive, where `n` is the number of bits that variant uses. Unsigned variants can store numbers from `0` to `2^n^ - 1`.
+
+.Integer literals
+[%header, cols="1,m", width=35%]
+|===
+| Number literals   | Example
+| Decimal           | 98_222
+| Hex               | 0xff
+| Octal             | 0o77
+| Binary            | 0b1111_0000
+| Byte (u8 only)    | b'A'
+|===
+
+==== Floating-point
+
+A floating-point number is a number with decimal points.
+
+Rust’s floating-point types are `f32` and `f64`, which are `32` bits and `64` bits in size, respectively. +
+The default type is `f64`. +
+All floating-point types are signed and represented according to the IEEE-754 standard.
+
+==== Boolean
+
+A Boolean has two possible values: `true` and `false`. +
+The Boolean type is specified using `bool`. +
+Booleans are `1` byte in size.
+
+==== Character
+
+The character type is specified using `char` and the value literal is specified with single quotes, as opposed to string literals, which use double quotes. +
+Characters are `4` bytes in size and represents a Unicode Scalar Value ranging from `U+0000` to `U+D7FF` and `U+E000` to `U+10FFFF` inclusive.
+
+=== Compound
+
+Compound types can group multiple values into one type. +
+Rust has two primitive compound types: tuples and arrays.
+
+==== Tuple
+
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. +
+Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+
+We create a tuple by writing a comma-separated list of values inside parentheses. +
+Each position in the tuple has a type.
+
+[source]
+----
+// with type annotation
+let tup_1: (i32, f64, u8) = (500, 6.4, 1);
+// without type annotation
+let tup_2: (500, 6.4, 1);
+----
+
+To get the individual values out of a tuple, we can use pattern matching to destructure a tuple value or access a tuple element directly by using a period (`.`) followed by the index of the value.
+
+[source]
+----
+let (x_1, y_1, z_1) = tup_1;
+let x_2 = tup_2.0;
+----
+
+==== Array
+
+Another way to have a collection of multiple values is with an array. +
+Unlike a tuple, every element of an array must have the same type. +
+Unlike the standard library's vectors, arrays have a fixed length. +
+Arrays are useful when you want your data allocated on the stack rather than the heap.
+
+We write the values in an array as a comma-separated list inside square brackets.
+
+[source]
+----
+// with type annotation (: [type; size])
+let a_1: [i32; 5] = [1, 2, 3, 4, 5];
+// without type annotation
+let a_2 = [1, 2, 3, 4, 5];
+----
+
+To get the individual values out of an array, we use the index of the value between square brackets.
+
+[source]
+----
+let a = a_1[0];
+----
+
+[WARNING]
+Rust will check that the specified index is less than the array length. If the index is greater than or equal to the length, Rust will panic footnote:[Similar to Java's https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IndexOutOfBoundsException.html[`IndexOutOfBoundsException`].].

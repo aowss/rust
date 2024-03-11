@@ -457,6 +457,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_first_program">First Program</a></li>
+<li><a href="#_concepts">Concepts</a>
+<ul class="sectlevel2">
+<li><a href="#_variables">Variables</a>
+<ul class="sectlevel3">
+<li><a href="#_constants">Constants</a></li>
+<li><a href="#_shadowing">Shadowing</a></li>
+</ul>
+</li>
+<li><a href="#_data_types">Data Types</a>
+<ul class="sectlevel3">
+<li><a href="#_scalar">Scalar</a></li>
+<li><a href="#_compound">Compound</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#_resources">Resources</a></li>
 </ul>
 </div>
@@ -1037,6 +1053,252 @@ The <code>guess</code> variable shadows the previously declared variable <sup cl
 </div>
 </div>
 <div class="sect1">
+<h2 id="_concepts">Concepts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_variables">Variables</h3>
+<div class="paragraph">
+<p>Variables are immutable by default.<br>
+The <code>let</code> keyword is used to create a variable.<br>
+The <code>mut</code> keyword is used to make them mutable.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The type of a mutable variable can&#8217;t be changed by the mutation.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">let x = 5;
+let mut y = 6;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_constants">Constants</h4>
+<div class="paragraph">
+<p>Constants are values that are bound to a name and are not allowed to change.<br>
+Constants can be declared in any scope, including the globab scope.<br>
+Constants can only be set to a constant expression, i.e. one that is not computed at runtime.</p>
+</div>
+<div class="paragraph">
+<p>The <code>const</code> keyword is used to create a constant.<br>
+Constants must be type annotated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">const SECONDS_IN_HOUR: u32 = 60 * 60;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shadowing">Shadowing</h4>
+<div class="paragraph">
+<p>You can declare a new variable with the same name as a previous variable.<br>
+The type of the variables doesn&#8217;t have to match.<br>
+In the below example, the variable <code>x</code> is immutable.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">fn main() {
+    let x = "five";
+    // x's value is 'five'
+    let x = 6;
+    // x's value is 6
+    {
+        let x = x * 2;
+        // x's value is 12
+        println!("The value of x in the inner scope is: {x}");
+    }
+    // x's value is 6
+    println!("The value of x is: {x}");
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types">Data Types</h3>
+<div class="paragraph">
+<p>Every value in Rust is of a certain data type.</p>
+</div>
+<div class="paragraph">
+<p>Rust is a statically typed language, which means that it must know the types of all variables at compile time.</p>
+</div>
+<div class="paragraph">
+<p>The compiler can usually infer what type we want to use based on the value and how we use it. In cases when many types are possible, we must add a type annotation.</p>
+</div>
+<div class="paragraph">
+<p>There are two data type subsets: scalar and compound.</p>
+</div>
+<div class="sect3">
+<h4 id="_scalar">Scalar</h4>
+<div class="paragraph">
+<p>A scalar type represents a single value.</p>
+</div>
+<div class="paragraph">
+<p>Rust has four primary scalar types: integers, floating-point numbers, Booleans and characters.</p>
+</div>
+<div class="sect4">
+<h5 id="_integer">Integer</h5>
+<div class="paragraph">
+<p>An integer is a number without a fractional component.</p>
+</div>
+<div class="paragraph">
+<p>Each variant can be either signed <sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup> <sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup> (prefixed with <code>i</code>) or unsigned (prefixed with <code>u</code>) and has an explicit size (<code>8</code>, <code>16</code>, <code>32</code>, <code>64</code> or <code>128</code> bits).<br>
+The integer types default to <code>i32</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each signed variant can store numbers from <code>-(2<sup>n</sup> - 1)</code> to <code>2<sup>n-1</sup> - 1</code> inclusive, where <code>n</code> is the number of bits that variant uses. Unsigned variants can store numbers from <code>0</code> to <code>2<sup>n</sup> - 1</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 35%;">
+<caption class="title">Table 1. Integer literals</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Number literals</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>98_222</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0xff</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Octal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0o77</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0b1111_0000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte (u8 only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>b&#8217;A'</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_floating_point">Floating-point</h5>
+<div class="paragraph">
+<p>A floating-point number is a number with decimal points.</p>
+</div>
+<div class="paragraph">
+<p>Rust’s floating-point types are <code>f32</code> and <code>f64</code>, which are <code>32</code> bits and <code>64</code> bits in size, respectively.<br>
+The default type is <code>f64</code>.<br>
+All floating-point types are signed and represented according to the IEEE-754 standard.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_boolean">Boolean</h5>
+<div class="paragraph">
+<p>A Boolean has two possible values: <code>true</code> and <code>false</code>.<br>
+The Boolean type is specified using <code>bool</code>.<br>
+Booleans are <code>1</code> byte in size.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_character">Character</h5>
+<div class="paragraph">
+<p>The character type is specified using <code>char</code> and the value literal is specified with single quotes, as opposed to string literals, which use double quotes.<br>
+Characters are <code>4</code> bytes in size and represents a Unicode Scalar Value ranging from <code>U+0000</code> to <code>U+D7FF</code> and <code>U+E000</code> to <code>U+10FFFF</code> inclusive.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compound">Compound</h4>
+<div class="paragraph">
+<p>Compound types can group multiple values into one type.<br>
+Rust has two primitive compound types: tuples and arrays.</p>
+</div>
+<div class="sect4">
+<h5 id="_tuple">Tuple</h5>
+<div class="paragraph">
+<p>A tuple is a general way of grouping together a number of values with a variety of types into one compound type.<br>
+Tuples have a fixed length: once declared, they cannot grow or shrink in size.</p>
+</div>
+<div class="paragraph">
+<p>We create a tuple by writing a comma-separated list of values inside parentheses.<br>
+Each position in the tuple has a type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">// with type annotation
+let tup_1: (i32, f64, u8) = (500, 6.4, 1);
+// without type annotation
+let tup_2: (500, 6.4, 1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To get the individual values out of a tuple, we can use pattern matching to destructure a tuple value or access a tuple element directly by using a period (<code>.</code>) followed by the index of the value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">let (x_1, y_1, z_1) = tup_1;
+let x_2 = tup_2.0;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_array">Array</h5>
+<div class="paragraph">
+<p>Another way to have a collection of multiple values is with an array.<br>
+Unlike a tuple, every element of an array must have the same type.<br>
+Unlike the standard library&#8217;s vectors, arrays have a fixed length.<br>
+Arrays are useful when you want your data allocated on the stack rather than the heap.</p>
+</div>
+<div class="paragraph">
+<p>We write the values in an array as a comma-separated list inside square brackets.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">// with type annotation (: [type; size])
+let a_1: [i32; 5] = [1, 2, 3, 4, 5];
+// without type annotation
+let a_2 = [1, 2, 3, 4, 5];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To get the individual values out of an array, we use the index of the value between square brackets.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-rust hljs" data-lang="rust">let a = a_1[0];</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Rust will check that the specified index is less than the array length. If the index is greater than or equal to the length, Rust will panic <sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_resources">Resources</h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -1105,10 +1367,19 @@ The <code>guess</code> variable shadows the previously declared variable <sup cl
 <div class="footnote" id="_footnotedef_17">
 <a href="#_footnoteref_17">17</a>. Why is it called <code>loop</code> and not <code>while</code>?`
 </div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. Signed numbers are stored using two’s complement representation.
+</div>
+<div class="footnote" id="_footnotedef_19">
+<a href="#_footnoteref_19">19</a>. In case of overflow, Rust performs two’s complement wrapping.
+</div>
+<div class="footnote" id="_footnotedef_20">
+<a href="#_footnoteref_20">20</a>. Similar to Java&#8217;s <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IndexOutOfBoundsException.html"><code>IndexOutOfBoundsException</code></a>.
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-10 11:43:28 -0400
+Last updated 2024-03-11 10:46:16 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

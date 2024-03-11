@@ -7,7 +7,7 @@
 :source-language:       rust
 :imagesdir:             ./res
 :toc2:
-:toclevels:             5
+:toclevels:             3
 :icons:                 font
 :data-uri:
 
@@ -20,6 +20,8 @@ include::sections/Getting-Started.adoc[leveloffset=+1]
 include::sections/Cargo.adoc[leveloffset=+1]
 
 include::sections/First-Program.adoc[leveloffset=+1]
+
+include::sections/Concepts.adoc[leveloffset=+1]
 
 == Resources
 
